@@ -1,0 +1,29 @@
+# \u5F00\u53D1\u73AF\u5883\u914D\u7F6E
+# \u6570\u636E\u6E90\u914D\u7F6E\uFF0C\u8BF7\u4FEE\u6539\u4E3A\u4F60\u9879\u76EE\u7684\u5B9E\u9645\u914D\u7F6E
+server:
+  port: 9088
+  session:
+    timeout: 10000
+  context-path: /project
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+  datasource:
+    # url: jdbc:mysql://192.168.8.138:3306/paoding_crm?characterEncoding=UTF-8&allowMultiQueries=true&useSSL=true
+      url: jdbc:mysql://localhost:3306/paoding_crm?characterEncoding=UTF-8&allowMultiQueries=true&useSSL=true
+      username: paoding
+      password: paoding
+      driver-class-name: com.mysql.jdbc.Driver
+  thymeleaf:
+    mode: HTML5
+    encoding: utf-8
+    content-type: text/html
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    
+    
+uploadFile.path: D:\\upload\\  #文件上传路径

@@ -1,9 +1,9 @@
-package ${modulePackage}.web;
+package com.company.project.module.sys.web;
 
-import ${basePackage}.core.Result;
-import ${basePackage}.core.ResultGenerator;
-import ${modulePackage}.model.${modelNameUpperCamel};
-import ${modulePackage}.service.${modelNameUpperCamel}Service;
+import com.company.project.core.Result;
+import com.company.project.core.ResultGenerator;
+import com.company.project.module.sys.model.SysUser;
+import com.company.project.module.sys.service.SysUserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,42 +15,42 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* Created by ${author} on ${date}.
+* Created by chen on 2019/05/21.
 */
 @RestController
-@RequestMapping("${baseRequestMapping}")
-public class ${modelNameUpperCamel}Controller {
+@RequestMapping("/module/sys/user")
+public class SysUserController {
     @Resource
-    private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
+    private SysUserService sysUserService;
 
     @PostMapping("/add")
-    public Result add(${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
+    public Result add(SysUser sysUser) {
+        sysUserService.save(sysUser);
         return ResultGenerator.genSuccessResult();
     }
 
     @PostMapping("/delete")
     public Result delete(@RequestParam Integer id) {
-        ${modelNameLowerCamel}Service.deleteById(id);
+        sysUserService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PostMapping("/update")
-    public Result update(${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
+    public Result update(SysUser sysUser) {
+        sysUserService.update(sysUser);
         return ResultGenerator.genSuccessResult();
     }
 
     @PostMapping("/detail")
     public Result detail(@RequestParam Integer id) {
-        ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
-        return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
+        SysUser sysUser = sysUserService.findById(id);
+        return ResultGenerator.genSuccessResult(sysUser);
     }
 
     @PostMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
-        List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findAll();
+        List<SysUser> list = sysUserService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }

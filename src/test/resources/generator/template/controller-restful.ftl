@@ -1,9 +1,9 @@
-package ${basePackage}.web;
+package ${modulePackage}.web;
 
 import ${basePackage}.core.Result;
 import ${basePackage}.core.ResultGenerator;
-import ${basePackage}.model.${modelNameUpperCamel};
-import ${basePackage}.service.${modelNameUpperCamel}Service;
+import ${modulePackage}.model.${modelNameUpperCamel};
+import ${modulePackage}.service.${modelNameUpperCamel}Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
