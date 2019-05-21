@@ -6,6 +6,7 @@ import com.company.project.module.sys.model.SysMenu;
 import com.company.project.module.sys.service.SysMenuService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import java.util.List;
 */
 @RestController
 @RequestMapping("/module/sys/menu")
+@Api(description = "菜单管理")
 public class SysMenuController {
     @Resource
     private SysMenuService sysMenuService;

@@ -31,9 +31,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
@@ -163,7 +161,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         String linkString = sb.toString();
         linkString = StringUtils.substring(linkString, 0, linkString.length() - 1);//去除最后一个'&'
 
-        String secret = "Potato";//密钥，自己修改
+        String secret = "paoding";//密钥，自己修改
         String sign = DigestUtils.md5Hex(linkString + secret);//混合密钥md5
 
         return StringUtils.equals(sign, requestSign);//比较
@@ -192,5 +190,30 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         }
 
         return ip;
+    }
+    /**
+     * 以前要访问一个页面需要先创建个Controller控制类，在写方法跳转到页面
+     * 在这里配置后就不需要那么麻烦了，直接访问http://localhost:8080/toLogin就跳转到login.html页面了
+     *
+     * @param registry
+     */
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("index");
+        registry.addViewController("/index").setViewName("index");
+        registry.addViewController("/tologin").setViewName("login");
+        registry.addViewController("/error/errordeal").setViewName("error/errordealogin");
+        registry.addViewController("/error/unauthorized").setViewName("error/unauthorized");
+        super.addViewControllers(registry);
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        //指定了静态资源文件的位置
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        //swagger
+        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        super.addResourceHandlers(registry);
     }
 }

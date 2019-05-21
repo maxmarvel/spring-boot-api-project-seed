@@ -6,6 +6,7 @@ import com.company.project.module.sys.model.SysUserRole;
 import com.company.project.module.sys.service.SysUserRoleService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import java.util.List;
 */
 @RestController
 @RequestMapping("/module/sys/userRole")
+@Api(description = "用户角色管理")
 public class SysUserRoleController {
     @Resource
     private SysUserRoleService sysUserRoleService;

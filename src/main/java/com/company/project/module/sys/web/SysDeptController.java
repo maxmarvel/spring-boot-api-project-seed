@@ -6,6 +6,8 @@ import com.company.project.module.sys.model.SysDept;
 import com.company.project.module.sys.service.SysDeptService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,10 +17,11 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* Created by chen on 2019/05/21.
-*/
+ * Created by chen on 2019/05/21.
+ */
 @RestController
 @RequestMapping("/module/sys/dept")
+@Api(description = "部门管理")
 public class SysDeptController {
     @Resource
     private SysDeptService sysDeptService;
@@ -53,5 +56,17 @@ public class SysDeptController {
         List<SysDept> list = sysDeptService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    /**
+     * 获取部门树
+     *
+     * @return
+     */
+    @PostMapping("/tree")
+    @ApiOperation(value = "部门树", notes = "部门异步请求树")
+    public List tree(@RequestParam(name = "parentId", defaultValue = "0") String parentId) {
+        // List<EasyUITreeNode> result = sysDeptService.tree(parentId);
+        return null;
     }
 }
