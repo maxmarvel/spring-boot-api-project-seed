@@ -48,6 +48,10 @@ public class SysLog {
      */
     private String params;
 
+    // 用于搜索条件中的时间字段
+    @Transient
+    private String timeField;
+
     /**
      * @return id
      */
@@ -186,5 +190,13 @@ public class SysLog {
      */
     public void setParams(String params) {
         this.params = params;
+    }
+
+    public String getTimeField() {
+        return timeField;
+    }
+
+    public void setTimeField(String timeField) {
+        this.timeField = timeField;
     }
 }
