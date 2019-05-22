@@ -5,6 +5,9 @@ import javax.persistence.*;
 
 @Table(name = "tb_sys_menu")
 public class SysMenu {
+    public static final Integer TYPE_MENU = 0;
+
+    public static final Integer TYPE_BUTTON = 1;
     /**
      * 主键id
      */
