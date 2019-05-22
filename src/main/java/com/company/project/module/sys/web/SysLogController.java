@@ -7,15 +7,15 @@ import com.company.project.core.model.QueryRequest;
 import com.company.project.core.util.FileUtil;
 import com.company.project.module.sys.model.SysLog;
 import com.company.project.module.sys.service.SysLogService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -41,6 +41,12 @@ public class SysLogController extends BaseController {
         return mv;
     }
 
+    @PostMapping("/list")
+    @ApiOperation(value = "列表", notes = "日志列表")
+    public Result list(QueryRequest request, SysLog log) {
+        Map<String, Object> listData = super.selectByPageNumSize(request, () -> this.sysLogService.findAllLogs(log));
+        return ResultGenerator.genSuccessResult(listData);
+    }
     //@PostMapping("/add")
     //public Result add(SysLog sysLog) {
     //    sysLogService.save(sysLog);
@@ -54,6 +60,20 @@ public class SysLogController extends BaseController {
         sysLogService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
+
+    @RequiresPermissions("log:delete")
+    @PostMapping("/batchDelete")
+    @ApiOperation(value = "批量删除", notes = "日志批量删除")
+    public Result batchDelete(@RequestParam String ids) {
+        try {
+            this.sysLogService.batchDelete(ids, "id", SysLog.class);
+            return ResultGenerator.genSuccessResult();
+        } catch (Exception e) {
+            logger.error("删除日志失败", e);
+            return ResultGenerator.genFailResult("删除日志失败，请联系网站管理员！");
+        }
+    }
+
 
     //@PostMapping("/update")
     //public Result update(SysLog sysLog) {
@@ -99,23 +119,5 @@ public class SysLogController extends BaseController {
         }
     }
 
-    @RequiresPermissions("log:delete")
-    @PostMapping("/batchDelete")
-    @ApiOperation(value = "批量删除", notes = "日志批量删除")
-    public Result batchDelete(@RequestParam String ids) {
-        try {
-            this.sysLogService.batchDelete(ids,"id",SysLog.class);
-            return ResultGenerator.genSuccessResult("删除日志成功！");
-        } catch (Exception e) {
-            logger.error("删除日志失败", e);
-            return ResultGenerator.genFailResult("删除日志失败，请联系网站管理员！");
-        }
-    }
 
-    @PostMapping("/list")
-    @ApiOperation(value = "列表", notes = "日志列表")
-    public Result logList(QueryRequest request, SysLog log) {
-        Map<String, Object> listData = super.selectByPageNumSize(request, () -> this.sysLogService.findAllLogs(log));
-        return ResultGenerator.genSuccessResult(listData);
-    }
 }

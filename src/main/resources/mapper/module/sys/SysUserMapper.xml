@@ -22,5 +22,6 @@
     <result column="operator" jdbcType="VARCHAR" property="operator" />
     <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
     <result column="operate_ip" jdbcType="VARCHAR" property="operateIp" />
+    <result column="theme" jdbcType="VARCHAR" property="theme" />
   </resultMap>
 </mapper>

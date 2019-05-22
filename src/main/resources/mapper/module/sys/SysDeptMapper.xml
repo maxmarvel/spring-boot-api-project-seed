@@ -15,4 +15,13 @@
     <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
     <result column="operate_ip" jdbcType="VARCHAR" property="operateIp" />
   </resultMap>
+
+  <update id="changeToTop" parameterType="java.util.List">
+    update tb_sys_dept set parent_id = 0 where id in ( select a.id from (
+    (select id from tb_sys_dept where parent_id in
+    <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+      #{deptId}
+    </foreach>
+    ) ) a )
+  </update>
 </mapper>

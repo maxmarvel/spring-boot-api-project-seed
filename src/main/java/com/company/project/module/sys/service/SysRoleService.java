@@ -1,4 +1,5 @@
 package com.company.project.module.sys.service;
+
 import com.company.project.module.sys.model.SysRole;
 import com.company.project.core.Service;
 import com.company.project.module.sys.model.dto.SysRoleMenuDto;
@@ -16,4 +17,6 @@ public interface SysRoleService extends Service<SysRole> {
     SysRoleMenuDto findRoleWithMenus(String id);
 
     SysRole findByName(String roleName);
+
+    void deleteRoles(String roleIds);
 }

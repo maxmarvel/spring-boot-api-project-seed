@@ -6,6 +6,26 @@ import javax.persistence.*;
 @Table(name = "tb_sys_user")
 public class SysUser {
     /**
+     * 账户状态
+     */
+    public static final Integer STATUS_VALID = 1;
+
+    public static final Integer STATUS_LOCK = 0;
+
+    public static final String DEFAULT_THEME = "blue";
+
+    public static final String DEFAULT_AVATAR = "default.jpg";
+
+    /**
+     * 性别
+     */
+    public static final String SEX_MALE = "0";
+
+    public static final String SEX_FEMALE = "1";
+
+    public static final String SEX_UNKNOW = "2";
+
+    /**
      * 主键id
      */
     @Id
@@ -25,7 +45,6 @@ public class SysUser {
 
     /**
      * 手机
-
      */
     private String telephone;
 
@@ -102,6 +121,11 @@ public class SysUser {
     private String operateIp;
 
     /**
+     * 主题
+     */
+    private String theme;
+
+    /**
      * 获取主键id
      *
      * @return id - 主键id
@@ -157,10 +181,8 @@ public class SysUser {
 
     /**
      * 获取手机
-
      *
      * @return telephone - 手机
-
      */
     public String getTelephone() {
         return telephone;
@@ -168,10 +190,8 @@ public class SysUser {
 
     /**
      * 设置手机
-
      *
      * @param telephone 手机
-
      */
     public void setTelephone(String telephone) {
         this.telephone = telephone;
@@ -412,11 +432,30 @@ public class SysUser {
     }
 
     /**
+     * 获取主题
+     *
+     * @return theme - 主题
+     */
+    public String getTheme() {
+        return theme;
+    }
+
+    /**
+     * 设置主题
+     *
+     * @param theme 主题
+     */
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    /**
      * shiro-redis v3.1.0 必须要有getAuthCacheKey()或者getId()方法
      * # Principal id field name. The field which you can get unique id to identify this principal.
      * # For example, if you use UserInfo as Principal class, the id field maybe userId, userName, email, etc.
      * # Remember to add getter to this id field. For example, getUserId(), getUserName(), getEmail(), etc.
      * # Default value is authCacheKey or id, that means your principal object has a method called "getAuthCacheKey()" or "getId()"
+     *
      * @return userId as Principal id field name
      */
     public String getAuthCacheKey() {

@@ -15,6 +15,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,6 +63,13 @@ public class SysRoleServiceImpl extends AbstractService<SysRole> implements SysR
         example.createCriteria().andCondition("lower(name)=", roleName.toLowerCase());
         List<SysRole> list = this.findByExample(example);
         return list.isEmpty() ? null : list.get(0);
+    }
+
+    @Override
+    public void deleteRoles(String roleIds) {
+        this.batchDelete(roleIds, "id", SysRole.class);
+        //this.roleMenuService.deleteRoleMenusByRoleId(roleIds);
+        // this.userRoleService.deleteUserRolesByRoleId(roleIds);
     }
 
 

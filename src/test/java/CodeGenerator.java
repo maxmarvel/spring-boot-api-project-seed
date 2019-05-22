@@ -39,14 +39,14 @@ public class CodeGenerator {
     public static void main(String[] args) {
         //genCode("输入表名");
         //genCodeByCustomModelName("输入表名","输入自定义Model名称");
-        genCodeByCustomModelName("tb_sys_dept", "SysDept");
+       /* genCodeByCustomModelName("tb_sys_dept", "SysDept");
         genCodeByCustomModelName("tb_sys_user", "SysUser");
         genCodeByCustomModelName("tb_sys_user_role", "SysUserRole");
         genCodeByCustomModelName("tb_sys_menu", "SysMenu");
         genCodeByCustomModelName("tb_sys_role", "SysRole");
         genCodeByCustomModelName("tb_sys_role_menu", "SysRoleMenu");
         genCodeByCustomModelName("tb_sys_log", "SysLog");
-        genCodeByCustomModelName("tb_sys_dict", "SysDict");
+        genCodeByCustomModelName("tb_sys_dict", "SysDict");*/
     }
 
     /**

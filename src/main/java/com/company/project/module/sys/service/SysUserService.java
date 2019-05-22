@@ -16,4 +16,14 @@ public interface SysUserService extends Service<SysUser> {
     List<SysUser> findUserWithDept(SysUser user, QueryRequest request);
 
     void registUser(SysUser user);
+
+    SysUser findByName(String username);
+
+    void addUser(SysUser user, String[] roles);
+
+    void updateTheme(String theme, String userName);
+
+    void deleteUsers(String ids);
+
+    void updateUser(SysUser user, String[] rolesSelect);
 }

@@ -52,6 +52,18 @@ public class SysRoleController extends BaseController {
         return ResultGenerator.genSuccessResult(listData);
     }
 
+    @PostMapping("/detail")
+    @ApiOperation(value = "明细", notes = "角色详细数据")
+    public Result detail(@RequestParam String id) {
+        try {
+            SysRoleMenuDto dto = this.sysRoleService.findRoleWithMenus(id);
+            return ResultGenerator.genSuccessResult();
+        } catch (Exception e) {
+            log.error("获取角色信息失败", e);
+            return ResultGenerator.genFailResult("获取角色信息失败，请联系网站管理员！");
+        }
+    }
+
     @Log("新增角色")
     @RequiresPermissions("role:add")
     @PostMapping("/add")
@@ -70,9 +82,9 @@ public class SysRoleController extends BaseController {
     @RequiresPermissions("role:delete")
     @PostMapping("/delete")
     @ApiOperation(value = "删除", notes = "角色删除")
-    public Result delete(@RequestParam String id) {
+    public Result delete(@RequestParam String ids) {
         try {
-            sysRoleService.deleteById(id);
+            sysRoleService.deleteRoles(ids);
             return ResultGenerator.genSuccessResult();
         } catch (Exception e) {
             log.error("删除角色失败", e);
@@ -96,17 +108,6 @@ public class SysRoleController extends BaseController {
 
     }
 
-    @PostMapping("/detail")
-    @ApiOperation(value = "明细", notes = "角色详细数据")
-    public Result detail(@RequestParam String id) {
-        try {
-            SysRoleMenuDto dto = this.sysRoleService.findRoleWithMenus(id);
-            return ResultGenerator.genSuccessResult();
-        } catch (Exception e) {
-            log.error("获取角色信息失败", e);
-            return ResultGenerator.genFailResult("获取角色信息失败，请联系网站管理员！");
-        }
-    }
 
     @PostMapping("/checkRoleName")
     @ApiOperation(value = "检查名称", notes = "角色名称检查")

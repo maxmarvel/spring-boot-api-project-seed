@@ -53,6 +53,18 @@ public class SysDictController extends BaseController {
         return ResultGenerator.genSuccessResult(listData);
     }
 
+    @PostMapping("/detail")
+    @ApiOperation(value = "明细", notes = "数据字典详细数据")
+    public Result detail(@RequestParam String id) {
+        try {
+            SysDict sysDict = sysDictService.findById(id);
+            return ResultGenerator.genSuccessResult(sysDict);
+        } catch (Exception e) {
+            log.error("获取字典信息失败", e);
+            return ResultGenerator.genFailResult("获取字典信息失败，请联系网站管理员！");
+        }
+    }
+
     @Log("新增字典 ")
     @RequiresPermissions("dict:add")
     @PostMapping("/add")
@@ -60,7 +72,7 @@ public class SysDictController extends BaseController {
     public Result add(SysDict sysDict) {
         try {
             sysDictService.save(sysDict);
-            return ResultGenerator.genSuccessResult("新增字典成功！");
+            return ResultGenerator.genSuccessResult();
         } catch (Exception e) {
             log.error("新增字典失败", e);
             return ResultGenerator.genFailResult("新增字典失败，请联系网站管理员！");
@@ -84,6 +96,7 @@ public class SysDictController extends BaseController {
 
     @Log("修改字典 ")
     @ApiOperation(value = "修改", notes = "数据字典修改")
+    @RequiresPermissions("dict:update")
     @PostMapping("/update")
     public Result update(SysDict sysDict) {
         try {
@@ -92,18 +105,6 @@ public class SysDictController extends BaseController {
         } catch (Exception e) {
             log.error("修改字典失败", e);
             return ResultGenerator.genFailResult("修改字典失败，请联系网站管理员！");
-        }
-    }
-
-    @PostMapping("/detail")
-    @ApiOperation(value = "明细", notes = "数据字典详细数据")
-    public Result detail(@RequestParam String id) {
-        try {
-            SysDict sysDict = sysDictService.findById(id);
-            return ResultGenerator.genSuccessResult(sysDict);
-        } catch (Exception e) {
-            log.error("获取字典信息失败", e);
-            return ResultGenerator.genFailResult("获取字典信息失败，请联系网站管理员！");
         }
     }
 
