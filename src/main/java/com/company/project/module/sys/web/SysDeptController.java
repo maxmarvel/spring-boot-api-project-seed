@@ -33,7 +33,7 @@ public class SysDeptController {
     }
 
     @PostMapping("/delete")
-    public Result delete(@RequestParam Integer id) {
+    public Result delete(@RequestParam String id) {
         sysDeptService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
@@ -45,7 +45,7 @@ public class SysDeptController {
     }
 
     @PostMapping("/detail")
-    public Result detail(@RequestParam Integer id) {
+    public Result detail(@RequestParam String id) {
         SysDept sysDept = sysDeptService.findById(id);
         return ResultGenerator.genSuccessResult(sysDept);
     }

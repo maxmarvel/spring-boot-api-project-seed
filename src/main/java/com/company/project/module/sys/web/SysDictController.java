@@ -32,7 +32,7 @@ public class SysDictController {
     }
 
     @PostMapping("/delete")
-    public Result delete(@RequestParam Integer id) {
+    public Result delete(@RequestParam String id) {
         sysDictService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
@@ -44,7 +44,7 @@ public class SysDictController {
     }
 
     @PostMapping("/detail")
-    public Result detail(@RequestParam Integer id) {
+    public Result detail(@RequestParam String id) {
         SysDict sysDict = sysDictService.findById(id);
         return ResultGenerator.genSuccessResult(sysDict);
     }

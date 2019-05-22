@@ -10,6 +10,7 @@
 - [ ] redis缓存；
 - [ ] quartz定时任务，动态执行；
 - [ ] rabbitMQ；
+- [ ] httpclient；
 - [ ] thymeleaf；
 - [ ] bootstrap；
 - [ ] docker；

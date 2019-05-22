@@ -32,7 +32,7 @@ public class SysMenuController {
     }
 
     @PostMapping("/delete")
-    public Result delete(@RequestParam Integer id) {
+    public Result delete(@RequestParam String id) {
         sysMenuService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
@@ -44,7 +44,7 @@ public class SysMenuController {
     }
 
     @PostMapping("/detail")
-    public Result detail(@RequestParam Integer id) {
+    public Result detail(@RequestParam String id) {
         SysMenu sysMenu = sysMenuService.findById(id);
         return ResultGenerator.genSuccessResult(sysMenu);
     }

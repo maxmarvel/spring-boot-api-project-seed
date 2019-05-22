@@ -1,0 +1,38 @@
+
+<style>
+	.datagrid-cell, .datagrid-cell-group, .datagrid-header-rownumber, .datagrid-cell-rownumber{   
+    text-overflow: ellipsis !important;  
+   }
+   
+</style>
+
+<div class="easyui-layout paoding-tb-layout" data-options="fit:true">
+    <div class="paoding-tab-content-north" data-options="region:'north',border:false">
+        
+        <!-- /数据表 -->
+
+        <!-- 数据表工具栏 -->
+        <div class="toolbar paoding-dg-toolbar">
+            <div class="easyui-panel toolbar-north-panel">
+                <input class="easyui-searchbox admin_log_searchbox paoding_searchbox" data-options="prompt:'关键字',searcher:common.search" id="admin_log_param"/>
+                <span>起始时间：</span>
+                <input id="admin_log_startDate"  type="text" class="easyui-datetimebox" style="width: 129px" />
+                <span>结束时间：</span>
+                <input id="admin_log_endDate"  type="text" class="easyui-datetimebox" style="width: 129px"/>
+                <a href="#" class="easyui-linkbutton paoding-linkbutton-left paoding-common-btn" data-type="search" data-content="log">查询</a>
+                <a href="#" class="easyui-linkbutton paoding-linkbutton-right paoding-linkbutton paoding-common-btn" data-type="batchDel" data-content="log" plain="true">批量删除</a>
+            </div>
+        </div>
+        <!-- /数据表工具栏 -->
+    </div>
+	<div class="paoding-tab-content-center" data-options="region:'center',border:false">
+        <!-- 数据表 -->
+        <table id="admin_log_dg">
+        </table>
+    </div>
+</div>
+
+<script src="static/js/app/admin/sys/log.js"></script>
+
+
+

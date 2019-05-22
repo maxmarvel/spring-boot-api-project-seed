@@ -32,7 +32,7 @@ public class SysUserRoleController {
     }
 
     @PostMapping("/delete")
-    public Result delete(@RequestParam Integer id) {
+    public Result delete(@RequestParam String id) {
         sysUserRoleService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
@@ -44,7 +44,7 @@ public class SysUserRoleController {
     }
 
     @PostMapping("/detail")
-    public Result detail(@RequestParam Integer id) {
+    public Result detail(@RequestParam String id) {
         SysUserRole sysUserRole = sysUserRoleService.findById(id);
         return ResultGenerator.genSuccessResult(sysUserRole);
     }
