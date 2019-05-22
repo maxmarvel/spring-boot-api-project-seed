@@ -15,7 +15,6 @@ import tk.mybatis.mapper.entity.Example.Criteria;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -53,10 +52,4 @@ public class SysLogServiceImpl extends AbstractService<SysLog> implements SysLog
         }
     }
 
-    @Override
-    @Transactional
-    public void deleteLogs(String logIds) {
-        List<String> list = Arrays.asList(logIds.split(","));
-        this.batchDelete(list, "id", SysLog.class);
-    }
 }

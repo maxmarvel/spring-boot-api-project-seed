@@ -19,7 +19,15 @@ public interface Service<T> {
     List<T> findByIds(String ids);//通过多个ID查找//eg：ids -> “1,2,3,4”
     List<T> findByCondition(Condition condition);//根据条件查找
     List<T> findAll();//获取所有
-    int batchDelete(List<String> list, String property, Class<T> clazz);//批量删除
+
+    /**
+     * //批量删除
+     * @param ids
+     * @param property
+     * @param clazz
+     * @return
+     */
+    int batchDelete(String ids, String property, Class<T> clazz);
     T findByKey(Object key);
     int delete(Object key);
     int updateNotNull(T entity);

@@ -8,7 +8,7 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="seq" jdbcType="INTEGER" property="seq" />
-    <result column="value" jdbcType="INTEGER" property="value" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
     <result column="pid" jdbcType="VARCHAR" property="pid" />
     <result column="key" jdbcType="VARCHAR" property="key" />
     <result column="status" jdbcType="INTEGER" property="status" />

@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.Map;
 /**
  * Created by chen on 2019/05/21.
  */
-@Controller
+@RestController
 @RequestMapping("/module/sys/log")
 @Api(description = "日志管理")
 public class SysLogController extends BaseController {
@@ -34,16 +35,17 @@ public class SysLogController extends BaseController {
 
     @RequiresPermissions("log:list")
     @PostMapping("/")
-    @ApiOperation(value = "访问路径", notes = "日志请求地址")
-    public String index() {
-        return "module/sys/log/list";
+    @ApiOperation(value = "访问路径", notes = "日志管理请求地址")
+    public ModelAndView index() {
+        ModelAndView mv = new ModelAndView("module/sys/log/list");
+        return mv;
     }
 
-    @PostMapping("/add")
-    public Result add(SysLog sysLog) {
-        sysLogService.save(sysLog);
-        return ResultGenerator.genSuccessResult();
-    }
+    //@PostMapping("/add")
+    //public Result add(SysLog sysLog) {
+    //    sysLogService.save(sysLog);
+    //    return ResultGenerator.genSuccessResult();
+    //}
 
     @RequiresPermissions("log:delete")
     @PostMapping("/delete")
@@ -53,17 +55,17 @@ public class SysLogController extends BaseController {
         return ResultGenerator.genSuccessResult();
     }
 
-    @PostMapping("/update")
-    public Result update(SysLog sysLog) {
-        sysLogService.update(sysLog);
-        return ResultGenerator.genSuccessResult();
-    }
-
-    @PostMapping("/detail")
-    public Result detail(@RequestParam String id) {
-        SysLog sysLog = sysLogService.findById(id);
-        return ResultGenerator.genSuccessResult(sysLog);
-    }
+    //@PostMapping("/update")
+    //public Result update(SysLog sysLog) {
+    //    sysLogService.update(sysLog);
+    //    return ResultGenerator.genSuccessResult();
+    //}
+    //
+    //@PostMapping("/detail")
+    //public Result detail(@RequestParam String id) {
+    //    SysLog sysLog = sysLogService.findById(id);
+    //    return ResultGenerator.genSuccessResult(sysLog);
+    //}
     //
     //@PostMapping("/list")
     //public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
@@ -74,7 +76,6 @@ public class SysLogController extends BaseController {
     //}
 
     @PostMapping("/excel")
-    @ResponseBody
     @ApiOperation(value = "excel导出", notes = "日志excel导出")
     public Result logExcel(SysLog log) {
         try {
@@ -87,7 +88,6 @@ public class SysLogController extends BaseController {
     }
 
     @PostMapping("/csv")
-    @ResponseBody
     @ApiOperation(value = "csv导出", notes = "日志csv导出")
     public Result logCsv(SysLog log) {
         try {
@@ -102,10 +102,9 @@ public class SysLogController extends BaseController {
     @RequiresPermissions("log:delete")
     @PostMapping("/batchDelete")
     @ApiOperation(value = "批量删除", notes = "日志批量删除")
-    @ResponseBody
     public Result batchDelete(@RequestParam String ids) {
         try {
-            this.sysLogService.deleteLogs(ids);
+            this.sysLogService.batchDelete(ids,"id",SysLog.class);
             return ResultGenerator.genSuccessResult("删除日志成功！");
         } catch (Exception e) {
             logger.error("删除日志失败", e);
@@ -114,7 +113,6 @@ public class SysLogController extends BaseController {
     }
 
     @PostMapping("/list")
-    @ResponseBody
     @ApiOperation(value = "列表", notes = "日志列表")
     public Result logList(QueryRequest request, SysLog log) {
         Map<String, Object> listData = super.selectByPageNumSize(request, () -> this.sysLogService.findAllLogs(log));

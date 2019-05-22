@@ -216,4 +216,5 @@ public class SysRole {
     public void setOperateIp(String operateIp) {
         this.operateIp = operateIp;
     }
+
 }

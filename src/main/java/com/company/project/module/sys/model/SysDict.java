@@ -24,7 +24,7 @@ public class SysDict {
     /**
      * 值
      */
-    private Integer value;
+    private String value;
 
     /**
      * 父ID
@@ -112,7 +112,7 @@ public class SysDict {
      *
      * @return value - 值
      */
-    public Integer getValue() {
+    public String getValue() {
         return value;
     }
 
@@ -121,7 +121,7 @@ public class SysDict {
      *
      * @param value 值
      */
-    public void setValue(Integer value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
