@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<!-- 后台页面布局，自动包装head、menu、NAV和foot -->
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<div th:replace="common/layout :: head"/>
+
+<!-- fixed -->
+<body class="hold-transition skin-blue fixed sidebar-mini">
+<div class="wrapper">
+    <!-- Main Header -->
+    <!--<div class="main-header" th:include="~{commons/main :: header}"></div>-->
+    <div th:replace="common/layout :: main-header"/>
+    <!-- Left side column. contains the logo and sidebar -->
+    <!--<div class="main-sidebar" th:include="~{commons/bar :: sidebar(activeUri='main.html')}"></div>-->
+    <!-- Content Wrapper. Contains page content -->
+    <!--<div class="content-wrapper" id="content-wrapper" layout:fragment="content"></div>-->
+    <!-- /.content-wrapper -->
+    <!-- Main Footer -->
+    <!--<div th:replace="~{commons/main::footer(activeUri='main.html')}"></div>-->
+    <!-- Control Sidebar -->
+    <!--<div th:replace="~{commons/main::controlSiderbar(activeUri='main.html')}"></div>-->
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+ immediately after the control sidebar -->
+    <!--<div class="control-sidebar-bg"></div>-->
+</div>
+<!-- ./wrapper -->
+
+<div th:replace="common/layout :: js"/>
+</body>
+</html>
+

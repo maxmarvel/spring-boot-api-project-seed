@@ -36,7 +36,7 @@ public class SysMenuController extends BaseController {
     @Resource
     private SysMenuService sysMenuService;
     @Log("获取菜单信息")
-    @PostMapping("/")
+    @GetMapping("/")
     @RequiresPermissions("menu:list")
     @ApiOperation(value = "访问路径", notes = "菜单管理请求地址")
     public ModelAndView index() {

@@ -11,6 +11,17 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <!-- 文件拷贝时的编码 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- 编译时的编码 -->
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <!--jdk版本-->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <junit.version>4.12</junit.version>
+
         <spring-boot.version>1.5.13.RELEASE</spring-boot.version>
         <swagger2.version>2.7.0</swagger2.version>
         <shiro.version>1.4.0</shiro.version>
@@ -35,6 +46,20 @@
         <javacsv.version>2.0</javacsv.version>
         <ip2region.version>1.7</ip2region.version>
         <docker.registry>HOST yours:5000</docker.registry>
+        <!--前端库-->
+        <adminlte.version>2.4.10</adminlte.version>
+        <bootstrap.version>3.4.1</bootstrap.version>
+        <bootstrap-table.version>1.14.2</bootstrap-table.version>
+
+        <jquery.version>3.3.1</jquery.version>
+        <fontawesome.version>4.7.0</fontawesome.version>
+        <ionicons.version>2.0.0</ionicons.version>
+        <jquery-easyui.version>1.5.21</jquery-easyui.version>
+        <jquery-validation.version>1.19.0</jquery-validation.version>
+        <jquery-migrate.version>3.0.0</jquery-migrate.version>
+
+        <echarts.version>4.1.0</echarts.version>
+        <bootstrap-modal.versionl>2.2.5</bootstrap-modal.versionl>
     </properties>
 
     <!-- Inherit defaults from Spring Boot -->
@@ -161,6 +186,12 @@
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
             <version>${commons-fileupload.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-io</artifactId>
+                    <groupId>commons-io</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -231,6 +262,42 @@
             <groupId>org.lionsoul</groupId>
             <artifactId>ip2region</artifactId>
             <version>${ip2region.version}</version>
+        </dependency>
+        <!--前端库-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+            <version>${webjars-locator.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>AdminLTE</artifactId>
+            <version>${adminlte.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>${bootstrap.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>bootstrap-table</artifactId>
+            <version>${bootstrap-table.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>${jquery.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>fontawesome</artifactId>
+            <version>${fontawesome.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>ionicons</artifactId>
+            <version>${ionicons.version}</version>
         </dependency>
     </dependencies>
 
