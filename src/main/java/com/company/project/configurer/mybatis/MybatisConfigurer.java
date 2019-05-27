@@ -3,6 +3,7 @@ package com.company.project.configurer.mybatis;
 import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -45,7 +46,10 @@ public class MybatisConfigurer {
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         factory.setMapperLocations(resolver.getResources("classpath*:mapper/**/*.xml"));
-        return factory.getObject();
+
+        SqlSessionFactory object = factory.getObject();
+        //object.getConfiguration().setJdbcTypeForNull(JdbcType.NULL);//为空
+        return object;
     }
 
     @Bean

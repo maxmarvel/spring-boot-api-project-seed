@@ -47,8 +47,6 @@ public class CodeGenerator {
         genCodeByCustomModelName("tb_sys_role_menu", "SysRoleMenu");
         genCodeByCustomModelName("tb_sys_log", "SysLog");
         genCodeByCustomModelName("tb_sys_dict", "SysDict");*/
-       /* genCodeByCustomModelName("tb_sys_user", "SysUser", "系统用户");
-        genCodeByCustomModelName("tb_sys_log", "SysLog", "系统日志");*/
     }
 
     /**
@@ -58,7 +56,7 @@ public class CodeGenerator {
      */
     public static void genCode(String... tableNames) {
         for (String tableName : tableNames) {
-            genCodeByCustomModelName(tableName, null, null);
+            genCodeByCustomModelName(tableName, null);
         }
     }
 
@@ -68,10 +66,10 @@ public class CodeGenerator {
      * @param tableName 数据表名称
      * @param modelName 自定义的 Model 名称
      */
-    public static void genCodeByCustomModelName(String tableName, String modelName, String apiModelName) {
+    public static void genCodeByCustomModelName(String tableName, String modelName) {
         genModelAndMapper(tableName, modelName);
         genService(tableName, modelName);
-        genController(tableName, modelName, apiModelName);
+        genController(tableName, modelName);
     }
 
 
@@ -175,7 +173,7 @@ public class CodeGenerator {
         }
     }
 
-    public static void genController(String tableName, String modelName, String apiModelName) {
+    public static void genController(String tableName, String modelName) {
         try {
             freemarker.template.Configuration cfg = getConfiguration();
 
@@ -188,7 +186,6 @@ public class CodeGenerator {
             data.put("modelNameLowerCamel", CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, modelNameUpperCamel));
             data.put("basePackage", BASE_PACKAGE);
             data.put("modulePackage", BASE_PACKAGE + MODULE_PACKAGE);
-            data.put("apiModelName", apiModelName);
 
             File file = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_CONTROLLER + modelNameUpperCamel + "Controller.java");
             if (!file.getParentFile().exists()) {

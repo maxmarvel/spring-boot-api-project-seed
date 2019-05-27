@@ -295,7 +295,7 @@
             <version>${fontawesome.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.webjars.npm</groupId>
+            <groupId>org.webjars.bower</groupId>
             <artifactId>ionicons</artifactId>
             <version>${ionicons.version}</version>
         </dependency>

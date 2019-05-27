@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,39 +23,65 @@ import java.util.List;
 */
 @RestController
 @RequestMapping("${baseRequestMapping}")
+@Api(description = "${apiModelName}管理")
 public class ${modelNameUpperCamel}Controller {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Resource
     private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
 
-    @PostMapping("/add")
-    public Result add(${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
-        return ResultGenerator.genSuccessResult();
-    }
-
-    @PostMapping("/delete")
-    public Result delete(@RequestParam String id) {
-        ${modelNameLowerCamel}Service.deleteById(id);
-        return ResultGenerator.genSuccessResult();
-    }
-
-    @PostMapping("/update")
-    public Result update(${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
-        return ResultGenerator.genSuccessResult();
-    }
-
-    @PostMapping("/detail")
-    public Result detail(@RequestParam String id) {
-        ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
-        return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
-    }
-
     @PostMapping("/list")
+    @ApiOperation(value = "列表", notes = "${apiModelName}列表")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
         List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }
+
+    @PostMapping("/detail")
+    @ApiOperation(value = "明细", notes = "${apiModelName}详细数据")
+    public Result detail(@RequestParam String id) {
+        ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
+        return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
+    }
+
+    @PostMapping("/add")
+    @ApiOperation(value = "新增", notes = "${apiModelName}新增")
+    public Result add(${modelNameUpperCamel} ${modelNameLowerCamel}) {
+        try {
+            ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
+            return ResultGenerator.genSuccessResult();
+          } catch (Exception e) {
+            logger.error("新增${apiModelName}信息失败", e);
+            return ResultGenerator.genFailResult("新增${apiModelName}信息失败，请联系网站管理员！");
+        }
+    }
+
+    @PostMapping("/delete")
+    @ApiOperation(value = "删除", notes = "${apiModelName}删除")
+    public Result delete(@RequestParam String id) {
+        try {
+            ${modelNameLowerCamel}Service.deleteById(id);
+            return ResultGenerator.genSuccessResult();
+          } catch (Exception e) {
+            logger.error("删除${apiModelName}信息失败", e);
+            return ResultGenerator.genFailResult("删除${apiModelName}信息失败，请联系网站管理员！");
+        }
+    }
+
+    @PostMapping("/update")
+    @ApiOperation(value = "修改", notes = "${apiModelName}修改")
+    public Result update(${modelNameUpperCamel} ${modelNameLowerCamel}) {
+        try {
+            ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
+            return ResultGenerator.genSuccessResult();
+          } catch (Exception e) {
+            logger.error("修改${apiModelName}信息失败", e);
+            return ResultGenerator.genFailResult("修改${apiModelName}信息失败，请联系网站管理员！");
+        }
+
+    }
+
+
 }
